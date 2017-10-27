@@ -1,5 +1,7 @@
 package buzz.pushfit.im.mvp.view.activity
 
+import android.view.KeyEvent
+import android.widget.TextView
 import buzz.pushfit.im.R
 import buzz.pushfit.im.base.BaseActivity
 import buzz.pushfit.im.mvp.view.ILoginView
@@ -15,6 +17,19 @@ class LoginActivity : BaseActivity(), ILoginView {
 
     override fun getLayoutResId(): Int = R.layout.abc_activity_login
 
+    override fun init() {
+        super.init()
+        login.setOnClickListener { login() }
+        password.setOnEditorActionListener { _, _, _ ->
+            login()
+            true
+        }
+
+    }
+
+    fun login() {
+
+    }
 
     override fun onUserNameError() {
         username.error = getString(R.string.username_error)
