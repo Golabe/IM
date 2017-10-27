@@ -31,6 +31,8 @@ class LoginActivity : BaseActivity(), ILoginView {
 
     //登陆
     fun login() {
+        //隐藏软件盘
+        hideSoftKeyboard()
         val username = username.text.trim().toString()
         val password = password.text.trim().toString()
         mPresenter.onLogin(username, password)
@@ -57,10 +59,10 @@ class LoginActivity : BaseActivity(), ILoginView {
         finish()
     }
 
-    override fun onLoginFailed() {
+    override fun onLoginFailed(code:Int,message:String) {
         //隐藏进度条
         dismissProgress()
-        toast(getString(R.string.login_failed))
+        toast(message)
     }
 
 }
