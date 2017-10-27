@@ -7,6 +7,11 @@ import buzz.pushfit.im.mvp.view.IRegisterView
 import cn.bmob.v3.exception.BmobException
 import cn.bmob.v3.listener.SaveListener
 import cn.bmob.v3.BmobUser
+import com.hyphenate.chat.EMClient
+
+import com.hyphenate.exceptions.HyphenateException
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 
 
 /**
@@ -39,11 +44,25 @@ class RegisterPresenter(val view: IRegisterView) : IRegisterPresenter {
         bu.signUp<BmobUser>(object : SaveListener<BmobUser>() {
             override fun done(s: BmobUser, e: BmobException?) {
                 if (e == null) {
-                    view.onRegisterSuccess()
+                    registerEaseMob(username, password)//注册到环信
                 } else {
                     view.onRegisterFailed()
                 }
             }
         })
+    }
+
+    fun registerEaseMob(username: String, password: String) {
+
+        doAsync {
+            try {
+                //注册失败会抛出HyphenateException
+                EMClient.getInstance().createAccount(username, password)//同步方法
+                uiThread { view.onRegisterSuccess() }
+            }catch (e:HyphenateException){
+                //注册失败
+                uiThread { view.onRegisterFailed() }
+            }
+        }
     }
 }

@@ -51,12 +51,13 @@ class RegisterActivity : BaseActivity(), IRegisterView {
 
     override fun onRegisterSuccess() {
         dismissProgress()
+        toast(getString(R.string.register_success))
         finish()
     }
 
     override fun onRegisterFailed() {
         dismissProgress()
-        toast("注册失败")
+        toast(getString(R.string.register_failed))
     }
 
 
