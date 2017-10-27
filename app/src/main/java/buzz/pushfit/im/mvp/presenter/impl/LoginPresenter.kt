@@ -14,13 +14,13 @@ class LoginPresenter(val view: ILoginView) : ILoginPresenter {
         if (username.isValidUserName()) {
             if (password.isValidPassword()) {
                 view.onStartLogin()
-                loginEaseMob(username, password)//登陆环信
+                onLoginEaseMob(username, password)//登陆环信
             } else view.onPasswordError()
 
         } else view.onUserNameError()
     }
 
-    private fun loginEaseMob(username: String, password: String) {
+    private fun onLoginEaseMob(username: String, password: String) {
 
     }
 }

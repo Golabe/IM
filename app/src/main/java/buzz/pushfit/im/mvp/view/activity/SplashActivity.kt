@@ -11,7 +11,7 @@ import org.jetbrains.anko.startActivity
  * Created by yuequan on 2017/10/27.
  */
 class SplashActivity : BaseActivity(), ISplashView {
-    private val presenter=SplashPresenter(this)
+    private val mPresenter=SplashPresenter(this)
     companion object {
         val DELAY = 2000L//延迟时间
     }
@@ -25,7 +25,7 @@ class SplashActivity : BaseActivity(), ISplashView {
     override fun init() {
         super.init()
 
-        presenter.onCheckLoginStatus()
+        mPresenter.onCheckLoginStatus()
     }
 
     //跳转登录界面

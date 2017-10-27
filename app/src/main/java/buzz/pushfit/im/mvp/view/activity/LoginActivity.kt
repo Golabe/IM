@@ -1,9 +1,9 @@
 package buzz.pushfit.im.mvp.view.activity
 
-import android.view.KeyEvent
-import android.widget.TextView
+
 import buzz.pushfit.im.R
 import buzz.pushfit.im.base.BaseActivity
+import buzz.pushfit.im.mvp.presenter.impl.LoginPresenter
 import buzz.pushfit.im.mvp.view.ILoginView
 import kotlinx.android.synthetic.main.abc_activity_login.*
 import org.jetbrains.anko.startActivity
@@ -13,6 +13,7 @@ import org.jetbrains.anko.toast
  * Created by yuequan on 2017/10/27.
  */
 class LoginActivity : BaseActivity(), ILoginView {
+    private val mPresenter = LoginPresenter(this)
 
 
     override fun getLayoutResId(): Int = R.layout.abc_activity_login
@@ -25,10 +26,14 @@ class LoginActivity : BaseActivity(), ILoginView {
             true
         }
 
+
     }
 
+    //登陆
     fun login() {
-
+        val username = username.text.trim().toString()
+        val password = password.text.trim().toString()
+        mPresenter.onLogin(username, password)
     }
 
     override fun onUserNameError() {
