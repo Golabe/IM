@@ -13,4 +13,5 @@ interface IRegisterView : IBaseView {
     fun onStartRegister()
     fun onRegisterSuccess()
     fun onRegisterFailed()
+    fun onUserNameExist()
 }

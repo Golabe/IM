@@ -19,4 +19,5 @@
     <string name="new_account">新用户</string>
     <string name="register_success">注册成功</string>
     <string name="register_failed">注册失败</string>
+    <string name="username_exist">用户名已存在</string>
 </resources>

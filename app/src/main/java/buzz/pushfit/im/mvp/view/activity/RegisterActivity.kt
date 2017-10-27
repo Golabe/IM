@@ -11,6 +11,7 @@ import org.jetbrains.anko.toast
 
 class RegisterActivity : BaseActivity(), IRegisterView {
 
+
     val preseneter = RegisterPresenter(this)
 
     override fun getLayoutResId(): Int = R.layout.abc_activity_register
@@ -60,5 +61,9 @@ class RegisterActivity : BaseActivity(), IRegisterView {
         toast(getString(R.string.register_failed))
     }
 
+    override fun onUserNameExist() {
+        dismissProgress()
+        toast(getString(R.string.username_exist))
+    }
 
 }
