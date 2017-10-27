@@ -17,8 +17,6 @@ import org.jetbrains.anko.toast
  */
 class LoginActivity : BaseActivity(), ILoginView {
     private val mPresenter = LoginPresenter(this)
-
-
     override fun getLayoutResId(): Int = R.layout.abc_activity_login
 
     override fun init() {
@@ -28,6 +26,9 @@ class LoginActivity : BaseActivity(), ILoginView {
             login()
             true
         }
+
+        forgotPassword.setOnClickListener {  }
+        newAccount.setOnClickListener { startActivity<RegisterActivity>() }
 
 
     }

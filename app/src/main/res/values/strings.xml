@@ -1,8 +1,10 @@
 <resources>
     <string name="app_name">IM</string>
+    <string name="again_password">确认密码</string>
     <string name="password">密码</string>
     <string name="username">用户名</string>
     <string name="login">登陆</string>
+    <string name="register">注册</string>
 
 
     <string name="username_error">用户名不合法,3-6位</string>
@@ -11,4 +13,6 @@
     <string name="login_loading">正在登陆</string>
     <string name="login_failed">登陆失败</string>
     <string name="permission_reject">权限被拒绝</string>
+    <string name="forgot_password">忘记密码？</string>
+    <string name="new_account">新用户</string>
 </resources>
