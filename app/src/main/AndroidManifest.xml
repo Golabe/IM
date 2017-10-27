@@ -10,9 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AMainActivity"/>
+        <activity android:name=".mvp.view.activity.MainActivity"/>
 
-        <activity android:name=".mvp.view.ASplashActivity"
+        <activity android:name=".mvp.view.activity.SplashActivity"
             android:theme="@style/AppTheme.Fullscreen"
             >
             <intent-filter>
@@ -21,7 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".mvp.view.ALoginActivity"/>
+        <activity android:name=".mvp.view.activity.LoginActivity"/>
         <!-- 设置环信应用的AppKey -->
         <meta-data android:name="EASEMOB_APPKEY"  android:value="1182171027178059#im" />
         <!-- 声明SDK所需的service SDK核心功能-->

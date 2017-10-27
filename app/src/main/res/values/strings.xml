@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">IM</string>
+    <string name="password">密码</string>
+    <string name="username">用户名</string>
+    <string name="login">登陆</string>
+
+
+    <string name="username_error">用户名不合法,3-6位，首字母必须是英文字符</string>
+    <string name="password_error">密码不合法，8-12位</string>
+
+    <string name="login_loading">正在登陆</string>
+    <string name="login_failed">登陆失败</string>
 </resources>
