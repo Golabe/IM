@@ -14,6 +14,12 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        ndk{
+            abiFilters 'armeabi','armeabi-v7a','x86','arm-64v8a'
+        }
+        useLibrary 'org.apache.http.legacy'
+
     }
     buildTypes {
         release {
@@ -21,6 +27,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 dependencies {
@@ -41,4 +48,6 @@ dependencies {
     compile('com.roughike:bottom-bar:2.3.1') {
         exclude module: 'design'
     }
+
+    compile 'cn.bmob.android:bmob-sdk:3.5.0'
 }

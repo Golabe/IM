@@ -2,6 +2,7 @@ package buzz.pushfit.im.app
 
 import android.app.Application
 import buzz.pushfit.im.BuildConfig
+import cn.bmob.v3.Bmob
 import com.hyphenate.chat.EMClient
 import com.hyphenate.chat.EMOptions
 
@@ -15,5 +16,7 @@ class IMApplication : Application() {
         EMClient.getInstance().init(applicationContext, EMOptions())
         //在做打包混淆时，关闭debug模式，避免消耗不必要的资源
         EMClient.getInstance().setDebugMode(BuildConfig.DEBUG)
+
+        Bmob.initialize(this,"e452cb800a33ff9a25aa99035dbc7df5")
     }
 }
