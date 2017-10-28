@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.RelativeLayout
 import buzz.pushfit.im.R
-import buzz.pushfit.im.mvp.model.FriendsListItem
+import buzz.pushfit.im.mvp.data.FriendsListItem
 import kotlinx.android.synthetic.main.item_friends_view.view.*
 
 /**

@@ -8,14 +8,11 @@ import buzz.pushfit.im.R
 import buzz.pushfit.im.adapter.EMContactListenerAdapter
 import buzz.pushfit.im.adapter.FriendsListAdapter
 import buzz.pushfit.im.base.BaseFragment
-import buzz.pushfit.im.mvp.model.FriendsListItem
 import buzz.pushfit.im.mvp.presenter.impl.FriendsPresenter
 import buzz.pushfit.im.mvp.view.IFriendsView
 import buzz.pushfit.im.widget.SlideBar
-import com.hyphenate.EMContactListener
 import com.hyphenate.chat.EMClient
 import kotlinx.android.synthetic.main.abd_fragment_friends.*
-import kotlinx.android.synthetic.main.item_friends_view.view.*
 import kotlinx.android.synthetic.main.layout_recycler.*
 
 /**

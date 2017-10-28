@@ -1,4 +1,4 @@
-package buzz.pushfit.im.mvp.model
+package buzz.pushfit.im.mvp.data
 
 /**
  * Created by yuequan on 2017/10/28.

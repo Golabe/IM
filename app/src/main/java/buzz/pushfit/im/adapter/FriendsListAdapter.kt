@@ -7,12 +7,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import buzz.pushfit.im.R
-import buzz.pushfit.im.mvp.model.FriendsListItem
+import buzz.pushfit.im.mvp.data.FriendsListItem
 import buzz.pushfit.im.mvp.view.activity.ChatActivity
 import buzz.pushfit.im.widget.FriendsListItemView
 import com.hyphenate.chat.EMClient
-import com.hyphenate.exceptions.HyphenateException
-import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.runOnUiThread
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast

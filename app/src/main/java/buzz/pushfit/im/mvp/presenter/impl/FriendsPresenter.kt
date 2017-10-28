@@ -1,6 +1,6 @@
 package buzz.pushfit.im.mvp.presenter.impl
 
-import buzz.pushfit.im.mvp.model.FriendsListItem
+import buzz.pushfit.im.mvp.data.FriendsListItem
 import buzz.pushfit.im.mvp.presenter.IFriendsPresenter
 import buzz.pushfit.im.mvp.view.IFriendsView
 import com.hyphenate.chat.EMClient
