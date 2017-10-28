@@ -17,6 +17,7 @@ class FriendsPresenter(val view: IFriendsView) : IFriendsPresenter {
 
     override fun onLoadFriendsData() {
         doAsync {
+            friendItemList.clear()
             try {
                 val usernames = EMClient.getInstance().contactManager().allContactsFromServer
                 usernames.sortBy { it[0] }
