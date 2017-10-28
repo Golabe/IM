@@ -9,6 +9,7 @@ import android.widget.TextView
 import buzz.pushfit.im.R
 import buzz.pushfit.im.adapter.TextWatcherAdapter
 import buzz.pushfit.im.base.BaseActivity
+import buzz.pushfit.im.adapter.MessageListAdapter
 import buzz.pushfit.im.mvp.presenter.impl.ChatPresenter
 import buzz.pushfit.im.mvp.view.IChatView
 import kotlinx.android.synthetic.main.abc_activity_chat.*
@@ -35,10 +36,11 @@ class ChatActivity : BaseActivity(), IChatView {
 
         }
 
-        edit.setOnEditorActionListener { _, _, _ ->
+        edit.setOnEditorActionListener { p0, p1, p2 ->
             sendMessage()
             true
         }
+
     }
 
     private fun sendMessage() {
@@ -50,7 +52,9 @@ class ChatActivity : BaseActivity(), IChatView {
     private fun initRecyclerView() {
         mRecyclerView = findViewById(R.id.recyclerView)
         mRecyclerView.apply {
+            setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
+            adapter= MessageListAdapter(context, presenter.messages)
 
         }
     }
@@ -75,10 +79,12 @@ class ChatActivity : BaseActivity(), IChatView {
 
     override fun onStartSendMessage() {
         mRecyclerView.adapter.notifyDataSetChanged()
+        mRecyclerView.smoothScrollToPosition(presenter.messages.size)
     }
 
     override fun onSendMessageSuccess() {
         mRecyclerView.adapter.notifyDataSetChanged()
+        mRecyclerView.smoothScrollToPosition(presenter.messages.size)
         toast(getString(R.string.send_message_success))
         edit.text.clear()//清除编辑框
     }
@@ -86,6 +92,7 @@ class ChatActivity : BaseActivity(), IChatView {
     override fun onSendMessageFailed() {
         toast(getString(R.string.send_message_failed))
         mRecyclerView.adapter.notifyDataSetChanged()
+        mRecyclerView.smoothScrollToPosition(presenter.messages.size)
     }
 
 }

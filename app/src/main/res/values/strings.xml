@@ -47,5 +47,6 @@
     <string name="chating">与%s聊天</string>
     <string name="send_message_success">发送消息成功</string>
     <string name="send_message_failed">发送消息失败</string>
+    <string name="not_txt_message">非文本消息</string>
 
 </resources>

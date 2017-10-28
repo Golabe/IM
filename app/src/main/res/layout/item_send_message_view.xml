@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="10dp">
 
     <TextView
         android:id="@+id/timestamp"
@@ -18,44 +18,46 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <ImageView
-            android:tint="@color/colorAccent"
-            android:src="@mipmap/ic_send_failed_64"
             android:id="@+id/send_failed"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/message"
+            android:layout_marginRight="20dp"
+            android:layout_toLeftOf="@id/sendMessage"
+            android:src="@mipmap/ic_send_failed_64"
+            android:tint="@color/colorAccent"
             android:visibility="gone" />
 
-        <ProgessBar
-            android:visibility="gone"
-            android:id="@+id/progress"
-            android:layout_marginRight="10dp"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@id/message"
+        <ProgressBar
+            android:id="@+id/sendProgress"
             android:layout_width="24dp"
-            android:layout_height="24dp" />
-        <TextView
-            android:gravity="center_vertical"
-            android:paddingLeft="10dp"
-            android:paddingRight="20dp"
-            android:background="@drawable/bg_send_message_64"
-            android:id="@+id/message"
-            android:textColor="@android:color/white"
-            android:textSize="16sp"
+            android:layout_height="24dp"
+            android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/userLogo"
+            android:layout_toLeftOf="@id/sendMessage"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/sendMessage"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <buzz.pushfit.im.widget.CircleImageView
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:layout_toLeftOf="@+id/userLogo"
+            android:background="@drawable/bg_send_message_"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
+
+        <buzz.pushfit.im.widget.CircleImageView
             android:id="@+id/userLogo"
-            android:src="@mipmap/ic_launcher"
-            android:layout_alignParentRight="true"
             android:layout_width="40dp"
-            android:layout_height="40dp" />
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/ic_launcher" />
     </RelativeLayout>
 </LinearLayout>

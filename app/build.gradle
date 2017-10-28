@@ -7,7 +7,8 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion compile_sdk_version
     buildToolsVersion build_tool_version
-
+    aaptOptions.cruncherEnabled = false
+    aaptOptions.useNewCruncher = false
     defaultConfig {
         applicationId "buzz.pushfit.im"
         minSdkVersion min_sdk_version
