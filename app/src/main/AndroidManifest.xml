@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="buzz.pushfit.im">
+
     <!-- Required -->
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -63,7 +64,11 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".mvp.view.activity.RegisterActivity"></activity>
+        <activity android:name=".mvp.view.activity.RegisterActivity" />
+        <activity
+            android:name=".mvp.view.activity.Main2Activity"
+            android:label="@string/title_activity_main2" />
+        <activity android:name=".mvp.view.activity.MeActivity"></activity>
     </application>
 
 </manifest>

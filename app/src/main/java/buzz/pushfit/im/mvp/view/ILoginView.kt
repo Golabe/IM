@@ -12,5 +12,5 @@ interface ILoginView:IBaseView {
     fun onStartLogin()
 
     fun onLoginSuccess()
-    fun onLoginFailed(code:Int,message:String)
+    fun onLoginFailed()
 }

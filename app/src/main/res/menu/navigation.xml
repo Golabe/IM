@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_message"
+        android:icon="@mipmap/ic_message_64"
+        android:title="@string/title_message" />
+
+    <item
+        android:id="@+id/navigation_friends"
+        android:icon="@mipmap/ic_friends_64"
+        android:title="@string/title_friends" />
+
+    <item
+        android:id="@+id/navigation_space"
+        android:icon="@mipmap/ic_space_64"
+        android:title="@string/title_space" />
+
+</menu>

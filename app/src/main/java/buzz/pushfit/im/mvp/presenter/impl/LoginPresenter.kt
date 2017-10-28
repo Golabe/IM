@@ -30,7 +30,7 @@ class LoginPresenter(val view: ILoginView) : ILoginPresenter {
             override fun onSuccess() {
                 EMClient.getInstance().groupManager().loadAllGroups()
                 EMClient.getInstance().chatManager().loadAllConversations()
-                Log.d(TAG, "成功")
+
                 uiThread {
                     view.onLoginSuccess()//登陆成功回调
                 }
@@ -41,7 +41,7 @@ class LoginPresenter(val view: ILoginView) : ILoginPresenter {
 
             override fun onError(code: Int, message: String?) {
                 uiThread {
-                    view.onLoginFailed(code, message!!)
+                    view.onLoginFailed()
                 }
             }
 

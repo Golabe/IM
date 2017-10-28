@@ -84,10 +84,10 @@ class LoginActivity : BaseActivity(), ILoginView {
         finish()
     }
 
-    override fun onLoginFailed(code: Int, message: String) {
+    override fun onLoginFailed() {
         //隐藏进度条
         dismissProgress()
-        toast(message)
+        toast(getString(R.string.login_failed))
     }
 
 }
