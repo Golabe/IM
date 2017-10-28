@@ -28,4 +28,11 @@
     <string name="logout">退出登录</string>
     <string name="logout_error">退出登录失败</string>
     <string name="logout_success">退出登录成功</string>
+    <string name="delete_friend_title">删除好友</string>
+    <string name="delete_friend_message">是否删除好友?</string>
+    <string name="delete">删除</string>
+    <string name="cancel">不删除</string>
+    <string name="delete_friend_success">删除好友成功</string>
+    <string name="delete_friend_failed">删除好友失败</string>
+
 </resources>
