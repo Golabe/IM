@@ -10,13 +10,18 @@ import com.hyphenate.chat.EMOptions
  * Created by yuequan on 2017/10/27.
  */
 class IMApplication : Application() {
+
+    companion object {
+        lateinit var instance: IMApplication
+    }
+
     override fun onCreate() {
         super.onCreate()
-
+        instance = this
         EMClient.getInstance().init(applicationContext, EMOptions())
         //在做打包混淆时，关闭debug模式，避免消耗不必要的资源
         EMClient.getInstance().setDebugMode(BuildConfig.DEBUG)
 
-        Bmob.initialize(this,"e452cb800a33ff9a25aa99035dbc7df5")
+        Bmob.initialize(this, "e452cb800a33ff9a25aa99035dbc7df5")
     }
 }

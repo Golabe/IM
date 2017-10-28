@@ -29,25 +29,26 @@ class AddFriendActivity : BaseActivity(), IAddFriendView {
         mRecyclerView = findViewById(R.id.recyclerView)
 
         mSwipeRefreshLayout.apply {
-            isRefreshing = true
 
+            isRefreshing = false
         }
 
         mRecyclerView.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
-            adapter = AddFriendAdapter(context,preseneter.addFriendItems)
+            adapter = AddFriendAdapter(context, preseneter.addFriendItems)
         }
 
         searchView.apply {
-            searchView.isSubmitButtonEnabled=true
+            searchView.isSubmitButtonEnabled = true
             searchView.onActionViewExpanded()
-            searchView.setOnQueryTextListener(object :SearchView.OnQueryTextListener{
+            searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String): Boolean {
 
-                   search(query)
+                    search(query)
                     return true
                 }
+
                 override fun onQueryTextChange(newText: String?): Boolean {
                     return true
                 }
@@ -56,11 +57,12 @@ class AddFriendActivity : BaseActivity(), IAddFriendView {
 
     }
 
-    private fun  search(search: String) {
+    private fun search(search: String) {
+        hideSoftKeyboard()
         showProgress(getString(R.string.search_loading))
-        if (search!=null){
+        if (search != null) {
             preseneter.onSearchFriends(search)
-        }else toast(getString(R.string.input_search_friend))
+        } else toast(getString(R.string.input_search_friend))
 
     }
 
