@@ -20,6 +20,28 @@ import kotlinx.android.synthetic.main.layout_recycler.*
  */
 class FriendsFragment : BaseFragment(), IFriendsView {
     val presenter = FriendsPresenter(this)
+
+    val contactListener=object : EMContactListenerAdapter() {
+        override fun onContactDeleted(p0: String?) {
+            super.onContactDeleted(p0)
+
+            presenter.onLoadFriendsData() //重新获取联系人列表
+        }
+        override fun onContactAdded(p0: String?) {
+            super.onContactAdded(p0)
+            presenter.onLoadFriendsData() //重新获取联系人列表
+        }
+    }
+    val slideBarListener=object : SlideBar.OnSectionChangeListener {
+        override fun onSectionChange(firstLatter: String) {
+            slideText.visibility = View.VISIBLE
+            slideText.text = firstLatter
+            mRecyclerView.smoothScrollToPosition(getPosition(firstLatter))
+        }
+        override fun onSlideFinish() {
+            slideText.visibility = View.GONE
+        }
+    }
     lateinit var mRefreshLayout: SwipeRefreshLayout
     lateinit var mRecyclerView: RecyclerView
     override fun getLayoutResId(): Int = R.layout.abd_fragment_friends
@@ -29,6 +51,22 @@ class FriendsFragment : BaseFragment(), IFriendsView {
         mRefreshLayout = activity.findViewById(R.id.swipeRefreshLayout)
         mRecyclerView = activity.findViewById(R.id.recyclerView)
         presenter.onLoadFriendsData()//加载好友列表
+        initSwipeRefreshLayout()
+        initRecyclerView()
+        EMClient.getInstance().contactManager().setContactListener(contactListener)//联系人列表监听
+        slideBar.onSectionChangeListener = slideBarListener   //SlideBar点击滑动监听
+
+    }
+
+    private fun initRecyclerView() {
+        recyclerView.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(context)
+            adapter = FriendsListAdapter(context, presenter.friendListItems)
+        }
+    }
+
+    private fun initSwipeRefreshLayout() {
         mRefreshLayout.apply {
             setColorSchemeResources(R.color.colorPrimary)
             isRefreshing = true
@@ -37,33 +75,6 @@ class FriendsFragment : BaseFragment(), IFriendsView {
                 presenter.onLoadFriendsData()
             }
         }
-        recyclerView.apply {
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(context)
-            adapter = FriendsListAdapter(context, presenter.friendListItems)
-        }
-
-        EMClient.getInstance().contactManager().setContactListener(object : EMContactListenerAdapter() {
-            override fun onContactDeleted(p0: String?) {
-                super.onContactDeleted(p0)
-                //重新获取联系人列表
-                presenter.onLoadFriendsData()
-            }
-        })
-        //SlideBar点击滑动监听
-        slideBar.onSectionChangeListener = object : SlideBar.OnSectionChangeListener {
-            override fun onSectionChange(firstLatter: String) {
-                slideText.visibility = View.VISIBLE
-                slideText.text = firstLatter
-                mRecyclerView.smoothScrollToPosition(getPosition(firstLatter))
-            }
-
-            override fun onSlideFinish() {
-                slideText.visibility = View.GONE
-            }
-
-        }
-
     }
 
     //获取RecyclerView index
@@ -86,6 +97,12 @@ class FriendsFragment : BaseFragment(), IFriendsView {
 
         mRefreshLayout.isRefreshing = false
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter==null
+        EMClient.getInstance().contactManager().removeContactListener(contactListener)
     }
 
 }
