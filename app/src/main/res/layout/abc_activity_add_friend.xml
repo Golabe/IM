@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="buzz.pushfit.im.mvp.view.activity.AddFriendActivity">
+
+    <include
+        android:id="@+id/add_friend_toolbar"
+        layout="@layout/layout_toolbar" />
+
+    <android.support.v7.widget.SearchView
+
+        android:iconifiedByDefault="false"
+        android:id="@+id/searchView"
+        android:imeOptions="actionSearch"
+        android:layout_width="match_parent"
+        app:queryHint="@string/search_friends"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.SearchView>
+
+    <include
+        android:id="@+id/add_friend_recycler"
+        layout="@layout/layout_recycler" />
+</LinearLayout>

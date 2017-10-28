@@ -1,11 +1,14 @@
 package buzz.pushfit.im.widget
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
+import android.view.MotionEvent
 import android.view.View
+import buzz.pushfit.im.R
 import org.jetbrains.anko.sp
 
 /**
@@ -15,6 +18,7 @@ class SlideBar(context: Context?, attrs: AttributeSet? = null) : View(context, a
     var sectionHeight = 0f
     val paint = Paint()
     var textBaseline = 0f
+    var onSectionChangeListener:OnSectionChangeListener?=null
 
     companion object {
         private val SECTIONS = arrayOf(
@@ -34,7 +38,7 @@ class SlideBar(context: Context?, attrs: AttributeSet? = null) : View(context, a
 
     init {
         paint.apply {
-            color = Color.WHITE
+            color = Color.BLACK
             textSize = sp(12).toFloat()
             textAlign = Paint.Align.CENTER
         }
@@ -52,5 +56,45 @@ class SlideBar(context: Context?, attrs: AttributeSet? = null) : View(context, a
             baseline += sectionHeight
         }
 
+    }
+
+    @SuppressLint("ResourceAsColor")
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        when (event.action) {
+            MotionEvent.ACTION_UP -> {
+                setBackgroundColor(android.R.color.transparent)
+                onSectionChangeListener?.onSlideFinish()
+            }
+            MotionEvent.ACTION_MOVE -> {
+                val index = getTouchIndex(event)
+                val firstLatter = SECTIONS[index]
+                onSectionChangeListener?.onSectionChange(firstLatter)
+            }
+            MotionEvent.ACTION_DOWN ->
+            {
+                setBackgroundResource(R.color.qq_gray)
+                val index = getTouchIndex(event)
+                val firstLatter = SECTIONS[index]
+                onSectionChangeListener?.onSectionChange(firstLatter)
+
+            }
+        }
+        return true
+    }
+
+    private fun getTouchIndex(event: MotionEvent): Int {
+        var index = (event.y / sectionHeight).toInt()
+        if (index < 0) {
+            index = 0
+        } else if (index >= SECTIONS.size) {
+            index = SECTIONS.size - 1
+        }
+        return index
+
+    }
+
+    interface OnSectionChangeListener {
+        fun onSectionChange(firstLatter:String)
+        fun onSlideFinish()
     }
 }

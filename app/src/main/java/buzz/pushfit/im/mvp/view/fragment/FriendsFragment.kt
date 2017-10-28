@@ -3,14 +3,19 @@ package buzz.pushfit.im.mvp.view.fragment
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.View
 import buzz.pushfit.im.R
 import buzz.pushfit.im.adapter.EMContactListenerAdapter
 import buzz.pushfit.im.adapter.FriendsListAdapter
 import buzz.pushfit.im.base.BaseFragment
+import buzz.pushfit.im.mvp.model.FriendsListItem
 import buzz.pushfit.im.mvp.presenter.impl.FriendsPresenter
 import buzz.pushfit.im.mvp.view.IFriendsView
+import buzz.pushfit.im.widget.SlideBar
 import com.hyphenate.EMContactListener
 import com.hyphenate.chat.EMClient
+import kotlinx.android.synthetic.main.abd_fragment_friends.*
+import kotlinx.android.synthetic.main.item_friends_view.view.*
 import kotlinx.android.synthetic.main.layout_recycler.*
 
 /**
@@ -38,7 +43,7 @@ class FriendsFragment : BaseFragment(), IFriendsView {
         recyclerView.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
-            adapter = FriendsListAdapter(context, presenter.friendItemList)
+            adapter = FriendsListAdapter(context, presenter.friendListItems)
         }
 
         EMClient.getInstance().contactManager().setContactListener(object : EMContactListenerAdapter() {
@@ -48,8 +53,30 @@ class FriendsFragment : BaseFragment(), IFriendsView {
                 presenter.onLoadFriendsData()
             }
         })
+        //SlideBar点击滑动监听
+        slideBar.onSectionChangeListener = object : SlideBar.OnSectionChangeListener {
+            override fun onSectionChange(firstLatter: String) {
+                slideText.visibility = View.VISIBLE
+                slideText.text = firstLatter
+                mRecyclerView.smoothScrollToPosition(getPosition(firstLatter))
+            }
+
+            override fun onSlideFinish() {
+                slideText.visibility = View.GONE
+            }
+
+        }
 
     }
+
+    //获取RecyclerView index
+    private fun getPosition(firstLatter: String): Int =
+            presenter.friendListItems.binarySearch {
+                friendsListItem ->
+                friendsListItem.firstLatter.minus(firstLatter[0])
+
+
+            }
 
     override fun onLoadFriendsSuccess() {
 

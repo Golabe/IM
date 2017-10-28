@@ -37,7 +37,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".mvp.view.activity.LoginActivity" />
+        <activity
+            android:name=".mvp.view.activity.LoginActivity"
+            android:theme="@style/AppTheme.Fullscreen" />
         <!-- 设置环信应用的AppKey -->
         <meta-data
             android:name="EASEMOB_APPKEY"
@@ -64,12 +66,12 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".mvp.view.activity.RegisterActivity" />
         <activity
-            android:name=".mvp.view.activity.Main2Activity"
-            android:label="@string/title_activity_main2" />
+            android:name=".mvp.view.activity.RegisterActivity"
+            android:theme="@style/AppTheme.Fullscreen" />
         <activity android:name=".mvp.view.activity.MeActivity" />
-        <activity android:name=".mvp.view.activity.ChatActivity"></activity>
+        <activity android:name=".mvp.view.activity.ChatActivity" />
+        <activity android:name=".mvp.view.activity.AddFriendActivity"></activity>
     </application>
 
 </manifest>

@@ -7,6 +7,7 @@ import android.support.annotation.RequiresApi
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.view.MenuItem
+import android.view.View
 import buzz.pushfit.im.R
 import buzz.pushfit.im.adapter.MyOnPageChangeListenerAdapter
 import buzz.pushfit.im.adapter.NavPagerFragmentAdapter
@@ -22,16 +23,27 @@ import java.util.*
 
 class MainActivity : BaseActivity() {
     @SuppressLint("StringFormatInvalid")
-    val titles = arrayOf("消息","联系人","动态")
+    val titles = arrayOf("消息", "联系人", "动态")
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         val beginTransaction = supportFragmentManager.beginTransaction()
         beginTransaction.replace(R.id.fragment, FragmentFactory.instance.getFragment(item.itemId))
         beginTransaction.commit()
-        when(item.itemId){
-            R.id.navigation_message ->between.text=titles[0]
-            R.id.navigation_friends ->between.text=titles[1]
-            R.id.navigation_space ->between.text=titles[2]
+        when (item.itemId) {
+            R.id.navigation_message -> {
+                between.text = titles[0]
+                right.visibility = View.GONE
+            }
+            R.id.navigation_friends -> {
+                between.text = titles[1]
+                right.visibility=View.VISIBLE
+                right.setBackgroundResource(R.mipmap.ic_add_48)
+                right.setOnClickListener { startActivity<AddFriendActivity>() }
+            }
+            R.id.navigation_space -> {
+                between.text = titles[2]
+                right.visibility=View.GONE
+            }
         }
         true
     }
@@ -43,7 +55,7 @@ class MainActivity : BaseActivity() {
     @SuppressLint("ResourceType")
     override fun init() {
         super.init()
-        between.text=getString(R.string.title_message)
+        between.text = getString(R.string.title_message)
         navigation.itemIconTintList = resources.getColorStateList(R.drawable.nav_menu_text_color, null)
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         left.setOnClickListener { startActivity<MeActivity>() }

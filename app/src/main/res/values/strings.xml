@@ -34,5 +34,10 @@
     <string name="cancel">不删除</string>
     <string name="delete_friend_success">删除好友成功</string>
     <string name="delete_friend_failed">删除好友失败</string>
+    <string name="add_friends">添加好友</string>
+    <string name="search_friends">搜索好友</string>
+    <string name="input_search_friend">输入搜索好友</string>
+    <string name="search_success">搜索成功</string>
+    <string name="search_failed">搜索失败</string>
 
 </resources>

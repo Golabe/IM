@@ -7,9 +7,24 @@
     <include
         android:id="@+id/friends_recycler"
         layout="@layout/layout_recycler" />
+
     <buzz.pushfit.im.widget.SlideBar
-        android:background="@color/qq_gray"
-        android:layout_gravity="right"
+        android:id="@+id/slideBar"
         android:layout_width="20dp"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_gravity="right"
+
+        />
+
+    <TextView
+        android:id="@+id/slideText"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:background="@drawable/bg_slidebar_selected_text"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
 </FrameLayout>

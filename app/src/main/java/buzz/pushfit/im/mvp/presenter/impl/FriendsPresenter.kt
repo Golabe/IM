@@ -13,11 +13,11 @@ import org.jetbrains.anko.uiThread
  * Created by yuequan on 2017/10/28.
  */
 class FriendsPresenter(val view: IFriendsView) : IFriendsPresenter {
-    val friendItemList = mutableListOf<FriendsListItem>()
+    val friendListItems = mutableListOf<FriendsListItem>()
 
     override fun onLoadFriendsData() {
         doAsync {
-            friendItemList.clear()
+            friendListItems.clear()//清空集合
             try {
                 val usernames = EMClient.getInstance().contactManager().allContactsFromServer
                 usernames.sortBy { it[0] }
@@ -27,7 +27,7 @@ class FriendsPresenter(val view: IFriendsView) : IFriendsPresenter {
 
                     val friendsListItem = FriendsListItem(s, s[0].toUpperCase(),showFirstLatter )
 
-                    friendItemList.add(friendsListItem)
+                    friendListItems.add(friendsListItem)
                 }
 
                 uiThread { view.onLoadFriendsSuccess() }//切换主线程
