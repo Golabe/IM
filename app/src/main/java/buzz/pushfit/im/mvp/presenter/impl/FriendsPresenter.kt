@@ -1,6 +1,8 @@
 package buzz.pushfit.im.mvp.presenter.impl
 
 import buzz.pushfit.im.mvp.data.FriendsListItem
+import buzz.pushfit.im.mvp.data.db.Contact
+import buzz.pushfit.im.mvp.data.db.IMDataBase
 import buzz.pushfit.im.mvp.presenter.IFriendsPresenter
 import buzz.pushfit.im.mvp.view.IFriendsView
 import com.hyphenate.chat.EMClient
@@ -18,6 +20,7 @@ class FriendsPresenter(val view: IFriendsView) : IFriendsPresenter {
     override fun onLoadFriendsData() {
         doAsync {
             friendListItems.clear()//清空集合
+            IMDataBase.instance.deleteAllContact()//清除所有联系人
             try {
                 val usernames = EMClient.getInstance().contactManager().allContactsFromServer
                 usernames.sortBy { it[0] }
@@ -28,6 +31,9 @@ class FriendsPresenter(val view: IFriendsView) : IFriendsPresenter {
                     val friendsListItem = FriendsListItem(s, s[0].toUpperCase(),showFirstLatter )
 
                     friendListItems.add(friendsListItem)
+
+                    val  contact=Contact(mutableMapOf("name" to s))
+                    IMDataBase.instance.saveContact(contact)
                 }
 
                 uiThread { view.onLoadFriendsSuccess() }//切换主线程

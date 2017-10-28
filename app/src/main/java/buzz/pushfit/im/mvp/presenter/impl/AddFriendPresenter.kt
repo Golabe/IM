@@ -1,6 +1,7 @@
 package buzz.pushfit.im.mvp.presenter.impl
 
-import buzz.pushfit.im.mvp.data.AddFriendData
+import buzz.pushfit.im.mvp.data.AddFriendItem
+import buzz.pushfit.im.mvp.data.db.IMDataBase
 import buzz.pushfit.im.mvp.presenter.IAddFriendPresenter
 import buzz.pushfit.im.mvp.view.IAddFriendView
 
@@ -17,7 +18,7 @@ import org.jetbrains.anko.doAsync
  */
 class AddFriendPresenter(val view: IAddFriendView) : IAddFriendPresenter {
 
-    val addFriendItems = mutableListOf<AddFriendData>()
+    val addFriendItems = mutableListOf<AddFriendItem>()
     override fun onSearchFriends(searchFriend: String) {
         val query = BmobQuery<BmobUser>()
 
@@ -30,11 +31,19 @@ class AddFriendPresenter(val view: IAddFriendView) : IAddFriendPresenter {
                 override fun done(p0: List<BmobUser>, e: BmobException?) {
                     if (e == null) {
                         // toast("查询用户成功:" + `object`.size)
+
+                        val allContact = IMDataBase.instance.getAllContact()//获取数据库联系人
                         uiThread {
                             //处理数据
                             p0?.forEach {
-                                val addFriendItem = AddFriendData(it.username, it.createdAt)
+
+                                val isAdded= allContact.any { contact -> contact.name==it.username }
+
+                                val addFriendItem = AddFriendItem(it.username, it.createdAt,isAdded)
+
                                 addFriendItems.add(addFriendItem)
+
+
                             }
                             view.onSearchSuccess()
                         }

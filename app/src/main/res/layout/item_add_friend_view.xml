@@ -42,10 +42,11 @@
 
         <Button
             android:id="@+id/addFriend"
-            android:layout_width="60dp"
+            android:layout_width="80dp"
             android:layout_height="40dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
+
     </RelativeLayout>
 </android.support.v7.widget.CardView>
