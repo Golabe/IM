@@ -50,7 +50,6 @@ class FriendsListAdapter(val context: Context, val friendItemList: MutableList<F
 
     private fun deleteFriend(username: String) {
 
-
                 EMClient.getInstance().contactManager().aysncDeleteContact(username,object : MyEMCallBackAdapter() {
                     override fun onSuccess() {
                         context.runOnUiThread { toast(getString(R.string.delete_friend_success)) }
