@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.layout_recycler.*
 class FriendsFragment : BaseFragment(), IFriendsView {
     val presenter = FriendsPresenter(this)
 
-    val contactListener = object : EMContactListenerAdapter() {
+    private val contactListener = object : EMContactListenerAdapter() {
         override fun onContactDeleted(p0: String?) {
             super.onContactDeleted(p0)
 
@@ -33,11 +33,16 @@ class FriendsFragment : BaseFragment(), IFriendsView {
             presenter.onLoadFriendsData() //重新获取联系人列表
         }
     }
-    val slideBarListener = object : SlideBar.OnSectionChangeListener {
+    private val slideBarListener = object : SlideBar.OnSectionChangeListener {
         override fun onSectionChange(firstLatter: String) {
             slideText.visibility = View.VISIBLE
             slideText.text = firstLatter
-            mRecyclerView.smoothScrollToPosition(getPosition(firstLatter))
+            try {
+
+                mRecyclerView.smoothScrollToPosition(getPosition(firstLatter))
+            } catch (e: Exception) {
+
+            }
         }
 
         override fun onSlideFinish() {
@@ -57,12 +62,9 @@ class FriendsFragment : BaseFragment(), IFriendsView {
         initRecyclerView()
         EMClient.getInstance().contactManager().setContactListener(contactListener)//联系人列表监听
 
-        if (presenter.friendListItems.size > 0) {
-            slideBar.visibility = View.VISIBLE
-            slideBar.onSectionChangeListener = slideBarListener   //SlideBar点击滑动监听
-        } else {
-            slideBar.visibility = View.GONE
-        }
+
+        slideBar.onSectionChangeListener = slideBarListener   //SlideBar点击滑动监听
+
 
     }
 
@@ -87,8 +89,7 @@ class FriendsFragment : BaseFragment(), IFriendsView {
 
     //获取RecyclerView index
     private fun getPosition(firstLatter: String): Int =
-            presenter.friendListItems.binarySearch {
-                friendsListItem ->
+            presenter.friendListItems.binarySearch { friendsListItem ->
                 friendsListItem.firstLatter.minus(firstLatter[0])
 
 

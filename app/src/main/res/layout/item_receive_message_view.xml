@@ -19,16 +19,15 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/message"
+            android:id="@+id/receiveMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
             android:layout_toRightOf="@+id/userLogo"
-            android:background="@drawable/bg_receive_message_48"
+            android:background="@drawable/bg_send_message_"
             android:gravity="center_vertical"
-            android:paddingLeft="20dp"
-            android:paddingRight="10dp"
+            android:padding="10dp"
             android:textColor="@android:color/white"
             android:textSize="16sp" />
 
