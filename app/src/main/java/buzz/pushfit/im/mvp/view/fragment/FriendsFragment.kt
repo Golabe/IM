@@ -21,23 +21,25 @@ import kotlinx.android.synthetic.main.layout_recycler.*
 class FriendsFragment : BaseFragment(), IFriendsView {
     val presenter = FriendsPresenter(this)
 
-    val contactListener=object : EMContactListenerAdapter() {
+    val contactListener = object : EMContactListenerAdapter() {
         override fun onContactDeleted(p0: String?) {
             super.onContactDeleted(p0)
 
             presenter.onLoadFriendsData() //重新获取联系人列表
         }
+
         override fun onContactAdded(p0: String?) {
             super.onContactAdded(p0)
             presenter.onLoadFriendsData() //重新获取联系人列表
         }
     }
-    val slideBarListener=object : SlideBar.OnSectionChangeListener {
+    val slideBarListener = object : SlideBar.OnSectionChangeListener {
         override fun onSectionChange(firstLatter: String) {
             slideText.visibility = View.VISIBLE
             slideText.text = firstLatter
             mRecyclerView.smoothScrollToPosition(getPosition(firstLatter))
         }
+
         override fun onSlideFinish() {
             slideText.visibility = View.GONE
         }
@@ -54,7 +56,13 @@ class FriendsFragment : BaseFragment(), IFriendsView {
         initSwipeRefreshLayout()
         initRecyclerView()
         EMClient.getInstance().contactManager().setContactListener(contactListener)//联系人列表监听
-        slideBar.onSectionChangeListener = slideBarListener   //SlideBar点击滑动监听
+
+        if (presenter.friendListItems.size > 0) {
+            slideBar.visibility = View.VISIBLE
+            slideBar.onSectionChangeListener = slideBarListener   //SlideBar点击滑动监听
+        } else {
+            slideBar.visibility = View.GONE
+        }
 
     }
 
@@ -101,7 +109,7 @@ class FriendsFragment : BaseFragment(), IFriendsView {
 
     override fun onDestroy() {
         super.onDestroy()
-        presenter==null
+        presenter == null
         EMClient.getInstance().contactManager().removeContactListener(contactListener)
     }
 
