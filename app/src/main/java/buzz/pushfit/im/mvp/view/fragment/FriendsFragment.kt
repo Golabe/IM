@@ -24,10 +24,8 @@ class FriendsFragment : BaseFragment(), IFriendsView {
     private val contactListener = object : EMContactListenerAdapter() {
         override fun onContactDeleted(p0: String?) {
             super.onContactDeleted(p0)
-
             presenter.onLoadFriendsData() //重新获取联系人列表
         }
-
         override fun onContactAdded(p0: String?) {
             super.onContactAdded(p0)
             presenter.onLoadFriendsData() //重新获取联系人列表
@@ -44,7 +42,6 @@ class FriendsFragment : BaseFragment(), IFriendsView {
 
             }
         }
-
         override fun onSlideFinish() {
             slideText.visibility = View.GONE
         }
@@ -61,13 +58,9 @@ class FriendsFragment : BaseFragment(), IFriendsView {
         initSwipeRefreshLayout()
         initRecyclerView()
         EMClient.getInstance().contactManager().setContactListener(contactListener)//联系人列表监听
-
-
         slideBar.onSectionChangeListener = slideBarListener   //SlideBar点击滑动监听
 
-
     }
-
     private fun initRecyclerView() {
         recyclerView.apply {
             setHasFixedSize(true)
@@ -75,7 +68,6 @@ class FriendsFragment : BaseFragment(), IFriendsView {
             adapter = FriendsListAdapter(context, presenter.friendListItems)
         }
     }
-
     private fun initSwipeRefreshLayout() {
         mRefreshLayout.apply {
             setColorSchemeResources(R.color.colorPrimary)
@@ -86,28 +78,18 @@ class FriendsFragment : BaseFragment(), IFriendsView {
             }
         }
     }
-
     //获取RecyclerView index
     private fun getPosition(firstLatter: String): Int =
             presenter.friendListItems.binarySearch { friendsListItem ->
                 friendsListItem.firstLatter.minus(firstLatter[0])
-
-
             }
-
     override fun onLoadFriendsSuccess() {
-
         mRefreshLayout.isRefreshing = false
-
         mRecyclerView.adapter.notifyDataSetChanged()
     }
-
     override fun onLoadFriendsFailed() {
-
         mRefreshLayout.isRefreshing = false
-
     }
-
     override fun onDestroy() {
         super.onDestroy()
         presenter == null

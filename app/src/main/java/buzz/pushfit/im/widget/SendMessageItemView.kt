@@ -20,8 +20,8 @@ class SendMessageItemView(context: Context?, attrs: AttributeSet? = null) : Rela
         View.inflate(context, R.layout.item_send_message_view, this)
     }
 
-    fun bindView(emMessage: EMMessage) {
-        updateTimestamp(emMessage)
+    fun bindView(emMessage: EMMessage, showTimestamp: Boolean) {
+        updateTimestamp(emMessage,showTimestamp)
         updateMessage(emMessage)
         updateProgress(emMessage)
 
@@ -52,8 +52,11 @@ class SendMessageItemView(context: Context?, attrs: AttributeSet? = null) : Rela
         }else context.toast(context.getString(R.string.not_txt_message))
     }
 
-    private fun  updateTimestamp(emMessage: EMMessage) {
+    private fun  updateTimestamp(emMessage: EMMessage, showTimestamp: Boolean) {
+        if (showTimestamp){
+            timestamp.visibility= View.VISIBLE
+            timestamp.text=DateUtils.getTimestampString(Date(emMessage.msgTime))
+        }else timestamp.visibility= View.GONE
 
-        timestamp.text=DateUtils.getTimestampString(Date(emMessage.msgTime))
     }
 }

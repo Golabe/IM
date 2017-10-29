@@ -43,10 +43,15 @@
     <string name="already_add">已添加</string>
     <string name="add">添加</string>
     <string name="send">发送</string>
-    
+
     <string name="chating">与%s聊天</string>
     <string name="send_message_success">发送消息成功</string>
     <string name="send_message_failed">发送消息失败</string>
     <string name="not_txt_message">非文本消息</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 
 </resources>

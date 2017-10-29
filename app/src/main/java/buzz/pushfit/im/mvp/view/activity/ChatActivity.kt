@@ -113,7 +113,6 @@ class ChatActivity : BaseActivity(), IChatView {
 
     override fun onDestroy() {
         super.onDestroy()
-        presenter == null
         EMClient.getInstance().chatManager().removeMessageListener(msgListener)
     }
 }

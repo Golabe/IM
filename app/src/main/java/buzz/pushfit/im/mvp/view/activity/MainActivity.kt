@@ -5,23 +5,20 @@ import android.annotation.SuppressLint
 import android.os.Build
 import android.support.annotation.RequiresApi
 import android.support.design.widget.BottomNavigationView
-import android.support.v4.app.Fragment
+import android.support.design.widget.NavigationView
+import android.support.v4.view.GravityCompat
+import android.support.v7.app.ActionBarDrawerToggle
 import android.view.MenuItem
 import android.view.View
 import buzz.pushfit.im.R
-import buzz.pushfit.im.adapter.MyOnPageChangeListenerAdapter
-import buzz.pushfit.im.adapter.NavPagerFragmentAdapter
 import buzz.pushfit.im.base.BaseActivity
 import buzz.pushfit.im.factory.FragmentFactory
-import buzz.pushfit.im.mvp.view.fragment.FriendsFragment
-import buzz.pushfit.im.mvp.view.fragment.MessageFragment
-import buzz.pushfit.im.mvp.view.fragment.SpaceFragment
 import kotlinx.android.synthetic.main.abc_activity_main.*
+import kotlinx.android.synthetic.main.layout_content_main.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
 import org.jetbrains.anko.startActivity
-import java.util.*
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity() , NavigationView.OnNavigationItemSelectedListener {
     @SuppressLint("StringFormatInvalid")
     val titles = arrayOf("消息", "联系人", "动态")
 
@@ -59,6 +56,51 @@ class MainActivity : BaseActivity() {
         navigation.itemIconTintList = resources.getColorStateList(R.drawable.nav_menu_text_color, null)
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         left.setOnClickListener { startActivity<MeActivity>() }
+
+        initDrawer()
+    }
+
+    private fun initDrawer() {
+        val toggle = ActionBarDrawerToggle(
+                this, drawer_layout, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawer_layout.addDrawerListener(toggle)
+        toggle.syncState()
+
+        nav_view.setNavigationItemSelectedListener(this)
+    }
+
+    override fun onBackPressed() {
+        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
+            drawer_layout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
+    }
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        // Handle navigation view item clicks here.
+        when (item.itemId) {
+            R.id.nav_camera -> {
+                // Handle the camera action
+            }
+            R.id.nav_gallery -> {
+
+            }
+            R.id.nav_slideshow -> {
+
+            }
+            R.id.nav_manage -> {
+
+            }
+            R.id.nav_share -> {
+
+            }
+            R.id.nav_send -> {
+
+            }
+        }
+
+        drawer_layout.closeDrawer(GravityCompat.START)
+        return true
     }
 
 }

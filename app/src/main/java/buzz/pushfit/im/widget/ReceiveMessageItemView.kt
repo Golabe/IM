@@ -20,8 +20,8 @@ class ReceiveMessageItemView(context: Context?, attrs: AttributeSet? = null) : R
         View.inflate(context, R.layout.item_receive_message_view, this)
     }
 
-    fun bindView(emMessage: EMMessage) {
-        updateTimestamp(emMessage)
+    fun bindView(emMessage: EMMessage, showTimestamp: Boolean) {
+        updateTimestamp(emMessage,showTimestamp)
         updateMessage(emMessage)
 
     }
@@ -31,8 +31,10 @@ class ReceiveMessageItemView(context: Context?, attrs: AttributeSet? = null) : R
         }else context.toast(context.getString(R.string.not_txt_message))
     }
 
-    private fun  updateTimestamp(emMessage: EMMessage) {
-
-        timestamp.text= DateUtils.getTimestampString(Date(emMessage.msgTime))
+    private fun  updateTimestamp(emMessage: EMMessage, showTimestamp: Boolean) {
+        if (showTimestamp) {
+            timestamp.visibility= View.VISIBLE
+            timestamp.text = DateUtils.getTimestampString(Date(emMessage.msgTime))
+        }else timestamp.visibility= View.GONE
     }
 }

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import buzz.pushfit.im.widget.ReceiveMessageItemView
 import buzz.pushfit.im.widget.SendMessageItemView
 import com.hyphenate.chat.EMMessage
+import com.hyphenate.util.DateUtils
 
 /**
  * Created by yuequan on 2017/10/28.
@@ -18,24 +19,36 @@ class MessageListAdapter(val context: Context, val messages: List<EMMessage>) : 
     }
 
     override fun getItemViewType(position: Int): Int {
-        if (messages[position].direct() == EMMessage.Direct.SEND) return ITEM_TYPE_SEND_MESSAGE else return ITEM_TYPE_RECEIVE_MESSAGE
+        return if (messages[position].direct() == EMMessage.Direct.SEND) ITEM_TYPE_SEND_MESSAGE else ITEM_TYPE_RECEIVE_MESSAGE
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
-        if (getItemViewType(position)== ITEM_TYPE_SEND_MESSAGE){
+        val showTimestamp = isShowTimestamp(position)
+
+        if (getItemViewType(position) == ITEM_TYPE_SEND_MESSAGE) {
             val sendMessageItemView = holder?.itemView as SendMessageItemView
-            sendMessageItemView.bindView(messages[position])
-        }else{
+            sendMessageItemView.bindView(messages[position],showTimestamp)
+        } else {
             val receiveMessageItemView = holder?.itemView as ReceiveMessageItemView
-            receiveMessageItemView.bindView(messages[position])
+            receiveMessageItemView.bindView(messages[position],showTimestamp)
         }
+    }
+
+    private fun isShowTimestamp(position: Int): Boolean {
+        //如果第一条消息或者和第一条间隔时间比较长显示
+        var showTimestamp = true
+        if (position > 0) {
+            showTimestamp = ! DateUtils.isCloseEnough(messages[position].msgTime, messages[position - 1].msgTime)
+        }
+        return showTimestamp
+
     }
 
 
     override fun getItemCount(): Int = messages.size
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
-        if (viewType== ITEM_TYPE_SEND_MESSAGE) return SendMessageViewHolder(SendMessageItemView(context)) else return ReceiveMessageViewHolder(ReceiveMessageItemView(context))
+        return if (viewType == ITEM_TYPE_SEND_MESSAGE) SendMessageViewHolder(SendMessageItemView(context)) else ReceiveMessageViewHolder(ReceiveMessageItemView(context))
     }
 
     class SendMessageViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView)
