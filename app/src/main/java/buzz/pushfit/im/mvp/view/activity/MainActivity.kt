@@ -11,14 +11,14 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AlertDialog
 import android.view.MenuItem
 import android.view.View
-import android.widget.LinearLayout
-import android.widget.TextView
-
 import buzz.pushfit.im.R
 import buzz.pushfit.im.base.BaseActivity
 import buzz.pushfit.im.factory.FragmentFactory
 import buzz.pushfit.im.mvp.presenter.impl.MainPresenter
 import buzz.pushfit.im.mvp.view.interfaces.IMainView
+import com.hyphenate.EMConnectionListener
+import com.hyphenate.EMError
+import com.hyphenate.chat.EMClient
 import kotlinx.android.synthetic.main.abc_activity_main.*
 import kotlinx.android.synthetic.main.layout_content_main.*
 import kotlinx.android.synthetic.main.layout_drawer_bottom.*
@@ -55,14 +55,11 @@ class MainActivity : BaseActivity(), IMainView, NavigationView.OnNavigationItemS
         true
     }
 
-
     override fun getLayoutResId(): Int = R.layout.abc_activity_main
-
     @RequiresApi(Build.VERSION_CODES.M)
     @SuppressLint("ResourceType")
     override fun init() {
         super.init()
-
         between.text = getString(R.string.title_message)
         initDrawer()
         navigation.itemIconTintList = resources.getColorStateList(R.drawable.nav_menu_text_color, null)
@@ -70,8 +67,21 @@ class MainActivity : BaseActivity(), IMainView, NavigationView.OnNavigationItemS
         left.setOnClickListener { drawerLayout.openDrawer(GravityCompat.START) }//打开侧滑菜单
         logout.setOnClickListener { logout() }//退出登录
 
-    }
+        EMClient.getInstance().addConnectionListener(object :EMConnectionListener{
+            override fun onConnected() {
 
+            }
+
+            override fun onDisconnected(p0: Int) {
+                if (p0==EMError.USER_LOGIN_ANOTHER_DEVICE){
+                    //发送多设备登录 跳转到登录界面
+                    startActivity<LoginActivity>()
+                    finish()
+                }
+            }
+        })
+
+    }
 
     private fun logout() {
         AlertDialog.Builder(this)
@@ -82,7 +92,6 @@ class MainActivity : BaseActivity(), IMainView, NavigationView.OnNavigationItemS
                 .show()
         drawerLayout.closeDrawer(GravityCompat.START)
     }
-
     private fun initDrawer() {
         val toggle = ActionBarDrawerToggle(
                 this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
@@ -90,7 +99,6 @@ class MainActivity : BaseActivity(), IMainView, NavigationView.OnNavigationItemS
         toggle.syncState()
         navigationView.setNavigationItemSelectedListener(this)
     }
-
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)
@@ -98,7 +106,6 @@ class MainActivity : BaseActivity(), IMainView, NavigationView.OnNavigationItemS
             super.onBackPressed()
         }
     }
-
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
