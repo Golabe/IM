@@ -59,5 +59,6 @@
     <string name="cancel_logout">取消退出</string>
     <string name="no_text_message">没有消息</string>
     <string name="max_show_message_count">99</string>
+    <string name="have_new_message">有新消息</string>
 
 </resources>
