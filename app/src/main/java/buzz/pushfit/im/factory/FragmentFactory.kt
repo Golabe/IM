@@ -3,7 +3,7 @@ package buzz.pushfit.im.factory
 import android.support.v4.app.Fragment
 import buzz.pushfit.im.R
 import buzz.pushfit.im.mvp.view.fragment.FriendsFragment
-import buzz.pushfit.im.mvp.view.fragment.MessageFragment
+import buzz.pushfit.im.mvp.view.fragment.ConversationFragment
 import buzz.pushfit.im.mvp.view.fragment.SpaceFragment
 
 /**
@@ -11,7 +11,7 @@ import buzz.pushfit.im.mvp.view.fragment.SpaceFragment
  */
 class FragmentFactory private constructor(){
     val message by lazy {
-        MessageFragment()
+        ConversationFragment()
     }
 
     val  friends by lazy {

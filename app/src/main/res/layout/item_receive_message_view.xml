@@ -25,7 +25,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
             android:layout_toRightOf="@+id/userLogo"
-            android:background="@drawable/bg_send_message_"
+            android:background="@drawable/bg_receive_message"
             android:gravity="center_vertical"
             android:padding="10dp"
             android:textColor="@android:color/white"

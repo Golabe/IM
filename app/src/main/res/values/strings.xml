@@ -57,5 +57,7 @@
     <string name="logout_message">退出当前用户登录</string>
     <string name="agree_logout">确认退出</string>
     <string name="cancel_logout">取消退出</string>
+    <string name="no_text_message">没有消息</string>
+    <string name="max_show_message_count">99</string>
 
 </resources>
