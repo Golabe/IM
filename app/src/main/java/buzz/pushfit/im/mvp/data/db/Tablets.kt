@@ -10,3 +10,10 @@ object ContactTablets {
     val CONTACT = "name"
 
 }
+
+object UserInfoTablets {
+    val NAME = "userInfo"
+
+    val ID = "_id"
+    val USERINFO = ""
+}

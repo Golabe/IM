@@ -21,14 +21,14 @@ import org.jetbrains.anko.toast
 class ChatActivity : BaseActivity(), IChatView {
 
     val presenter = ChatPresenter(this)
-    lateinit var mRecyclerView: RecyclerView
     lateinit var username: String
-    var msgListener: EMMessageListener = object : EMMessageListenerAdapter() {
+    private var msgListener: EMMessageListener = object : EMMessageListenerAdapter() {
 
         override fun onMessageReceived(messages: List<EMMessage>) {
             presenter.addMessage(username, messages)
 
-            runOnUiThread { mRecyclerView.adapter.notifyDataSetChanged()
+            runOnUiThread {
+                chatRecyclerView.adapter.notifyDataSetChanged()
                 scrollToBottom()
             }
         }
@@ -43,16 +43,15 @@ class ChatActivity : BaseActivity(), IChatView {
         initEdit()
         initRecyclerView()
 
-        send.setOnClickListener {
-            sendMessage()
-
-        }
 
         edit.setOnEditorActionListener { p0, p1, p2 ->
             sendMessage()
             true
         }
         EMClient.getInstance().chatManager().addMessageListener(msgListener)
+
+        send.setOnClickListener { sendMessage() }
+        presenter.loadMessage(username)
 
 
     }
@@ -64,13 +63,23 @@ class ChatActivity : BaseActivity(), IChatView {
     }
 
     private fun initRecyclerView() {
-        mRecyclerView = findViewById(R.id.recyclerView)
-        mRecyclerView.apply {
+        chatRecyclerView.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
             adapter = MessageListAdapter(context, presenter.messages)
 
+            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
+                    if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                        val linearLayoutManager = layoutManager as LinearLayoutManager
+                        if (linearLayoutManager.findFirstVisibleItemPosition() == 0) {
+                            presenter.loadMoreMessage(username)
+                        }
+                    }
+                }
+            })
         }
+
     }
 
     private fun initEdit() {
@@ -92,23 +101,33 @@ class ChatActivity : BaseActivity(), IChatView {
     }
 
     override fun onStartSendMessage() {
-        mRecyclerView.adapter.notifyDataSetChanged()
+        chatRecyclerView.adapter.notifyDataSetChanged()
     }
 
     override fun onSendMessageSuccess() {
-        mRecyclerView.adapter.notifyDataSetChanged()
+        chatRecyclerView.adapter.notifyDataSetChanged()
         toast(getString(R.string.send_message_success))
         edit.text.clear()//清除编辑框
         scrollToBottom()
     }
 
     private fun scrollToBottom() {
-        mRecyclerView.scrollToPosition(presenter.messages.size-1)
+        chatRecyclerView.scrollToPosition(presenter.messages.size - 1)
     }
 
     override fun onSendMessageFailed() {
         toast(getString(R.string.send_message_failed))
-        mRecyclerView.adapter.notifyDataSetChanged()
+        chatRecyclerView.adapter.notifyDataSetChanged()
+    }
+
+    override fun onMessageLoad() {
+        chatRecyclerView.adapter.notifyDataSetChanged()
+        scrollToBottom()
+    }
+
+    override fun onMoreMessageLoaded(size:Int) {
+        chatRecyclerView.adapter.notifyDataSetChanged()
+        chatRecyclerView.scrollToPosition(size)
     }
 
     override fun onDestroy() {

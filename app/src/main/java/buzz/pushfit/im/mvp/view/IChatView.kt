@@ -9,4 +9,6 @@ interface IChatView:IBaseView {
     fun onStartSendMessage()
     fun onSendMessageSuccess()
     fun onSendMessageFailed()
+    fun onMessageLoad()
+    fun onMoreMessageLoaded(size:Int)
 }

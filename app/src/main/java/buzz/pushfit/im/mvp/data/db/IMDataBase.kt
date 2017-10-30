@@ -15,6 +15,12 @@ class IMDataBase {
         val instance = IMDataBase()
     }
 
+    fun saveUserInfo(){
+        dataBaseHelper.use {
+
+        }
+
+    }
     fun saveContact(contact: Contact) {
         dataBaseHelper.use {
             insert(ContactTablets.NAME, *contact.map.toVarargArray())

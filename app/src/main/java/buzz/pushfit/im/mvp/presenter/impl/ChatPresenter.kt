@@ -5,12 +5,28 @@ import buzz.pushfit.im.mvp.presenter.IChatPresenter
 import buzz.pushfit.im.mvp.view.IChatView
 import com.hyphenate.chat.EMClient
 import com.hyphenate.chat.EMMessage
+import org.jetbrains.anko.doAsync
 
 /**
  * Created by yuequan on 2017/10/28.
  */
 class ChatPresenter(val view: IChatView) : IChatPresenter {
+    companion object {
+        val PAGE_SIZE=10
+    }
 
+    override fun loadMessage(username: String) {
+
+        doAsync {
+
+            val conversation = EMClient.getInstance().chatManager().getConversation(username)
+            messages.addAll(conversation.allMessages)
+
+            uiThread {
+                view.onMessageLoad()
+            }
+        }
+    }
 
 
     val messages = mutableListOf<EMMessage>()
@@ -39,6 +55,16 @@ class ChatPresenter(val view: IChatView) : IChatPresenter {
         val conversation = EMClient.getInstance().chatManager().getConversation(username)
         conversation.markAllMessagesAsRead()
     }
+    override fun loadMoreMessage(username: String) {
 
+        doAsync {
+
+            val conversation = EMClient.getInstance().chatManager().getConversation(username)
+            val msgId = messages[0].msgId
+            val loadMoreMsgFromDB = conversation.loadMoreMsgFromDB(msgId, PAGE_SIZE)
+            messages.addAll(0,loadMoreMsgFromDB)
+            uiThread {view.onMoreMessageLoaded(loadMoreMsgFromDB.size)  }
+        }
+    }
 
 }

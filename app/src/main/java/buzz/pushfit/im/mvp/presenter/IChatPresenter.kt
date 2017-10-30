@@ -10,5 +10,7 @@ interface IChatPresenter:BasePresenter {
 
     fun onSendMessage(contact: String,message:String)
     fun addMessage(username: String, messages: List<EMMessage>)
+    fun loadMessage(username: String)
+    fun loadMoreMessage(username: String)
 
 }

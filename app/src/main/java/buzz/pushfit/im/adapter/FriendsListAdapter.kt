@@ -18,7 +18,7 @@ import org.jetbrains.anko.toast
 /**
  * Created by yuequan on 2017/10/28.
  */
-class FriendsListAdapter(val context: Context, val friendItemList: MutableList<FriendsListItem>) : RecyclerView.Adapter<FriendsListAdapter.FriendsViewHolder>() {
+class FriendsListAdapter(val context: Context, private val friendItemList: MutableList<FriendsListItem>) : RecyclerView.Adapter<FriendsListAdapter.FriendsViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): FriendsViewHolder {
         return FriendsViewHolder(FriendsListItemView(context))
     }
@@ -64,7 +64,5 @@ class FriendsListAdapter(val context: Context, val friendItemList: MutableList<F
 
     override fun getItemCount(): Int = friendItemList.size
 
-    class FriendsViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
-
-    }
+    class FriendsViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView)
 }

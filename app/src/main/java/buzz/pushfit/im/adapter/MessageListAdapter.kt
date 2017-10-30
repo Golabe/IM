@@ -12,7 +12,7 @@ import com.hyphenate.util.DateUtils
 /**
  * Created by yuequan on 2017/10/28.
  */
-class MessageListAdapter(val context: Context, val messages: List<EMMessage>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MessageListAdapter(val context: Context, private val messages: List<EMMessage>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     companion object {
         val ITEM_TYPE_SEND_MESSAGE = 0
         val ITEM_TYPE_RECEIVE_MESSAGE = 1

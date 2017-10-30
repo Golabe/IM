@@ -2,7 +2,6 @@ package buzz.pushfit.im.mvp.view.activity
 
 
 import android.annotation.SuppressLint
-import android.content.DialogInterface
 import android.os.Build
 import android.support.annotation.RequiresApi
 import android.support.design.widget.BottomNavigationView
@@ -60,18 +59,17 @@ class MainActivity : BaseActivity(), IMainView, NavigationView.OnNavigationItemS
     @SuppressLint("ResourceType")
     override fun init() {
         super.init()
+
         between.text = getString(R.string.title_message)
         initDrawer()
         navigation.itemIconTintList = resources.getColorStateList(R.drawable.nav_menu_text_color, null)
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-        left.setOnClickListener { }
-
-
-
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)//底部导航栏点击事件监听
+        left.setOnClickListener {drawerLayout.openDrawer(GravityCompat.START) }//打开侧滑菜单
         logout.setOnClickListener { logout() }//退出登录
+
     }
 
-    //退出登录
+
     private fun logout() {
         AlertDialog.Builder(this)
                 .setTitle(getString(R.string.hint))
@@ -79,21 +77,20 @@ class MainActivity : BaseActivity(), IMainView, NavigationView.OnNavigationItemS
                 .setNegativeButton(getString(R.string.cancel_logout), null)
                 .setPositiveButton(getString(R.string.agree_logout)) { _, _ -> presenter.onLogout() }
                 .show()
-        drawer_layout.closeDrawer(GravityCompat.START)
+        drawerLayout.closeDrawer(GravityCompat.START)
     }
 
-    //    初始化滑动菜单
     private fun initDrawer() {
         val toggle = ActionBarDrawerToggle(
-                this, drawer_layout, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawer_layout.addDrawerListener(toggle)
+                this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
-        nav_view.setNavigationItemSelectedListener(this)
+        navigationView.setNavigationItemSelectedListener(this)
     }
 
     override fun onBackPressed() {
-        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-            drawer_layout.closeDrawer(GravityCompat.START)
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
         }
@@ -121,13 +118,13 @@ class MainActivity : BaseActivity(), IMainView, NavigationView.OnNavigationItemS
 
             }
         }
-        drawer_layout.closeDrawer(GravityCompat.START)
+        drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
 
     override fun onLogoutSuccess() {
         toast(getString(R.string.logout_success))
-        startActivity<RegisterActivity>()
+        startActivity<LoginActivity>()
         finish()
     }
 
