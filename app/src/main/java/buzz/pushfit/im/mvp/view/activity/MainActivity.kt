@@ -11,6 +11,9 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AlertDialog
 import android.view.MenuItem
 import android.view.View
+import android.widget.LinearLayout
+import android.widget.TextView
+
 import buzz.pushfit.im.R
 import buzz.pushfit.im.base.BaseActivity
 import buzz.pushfit.im.factory.FragmentFactory
@@ -64,7 +67,7 @@ class MainActivity : BaseActivity(), IMainView, NavigationView.OnNavigationItemS
         initDrawer()
         navigation.itemIconTintList = resources.getColorStateList(R.drawable.nav_menu_text_color, null)
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)//底部导航栏点击事件监听
-        left.setOnClickListener {drawerLayout.openDrawer(GravityCompat.START) }//打开侧滑菜单
+        left.setOnClickListener { drawerLayout.openDrawer(GravityCompat.START) }//打开侧滑菜单
         logout.setOnClickListener { logout() }//退出登录
 
     }
@@ -130,5 +133,13 @@ class MainActivity : BaseActivity(), IMainView, NavigationView.OnNavigationItemS
 
     override fun onLogoutError() = toast(getString(R.string.logout_error))
 
+    override fun onResume() {
+        super.onResume()
 
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+    }
 }

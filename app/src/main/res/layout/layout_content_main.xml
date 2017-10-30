@@ -20,6 +20,9 @@
     </FrameLayout>
 
 
+
+
+
     <!--底部导航栏-->
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
@@ -27,4 +30,6 @@
         android:layout_height="@dimen/bottom_bar_height"
         android:background="?android:attr/windowBackground"
         app:menu="@menu/navigation" />
+
+
 </LinearLayout>

@@ -27,7 +27,6 @@ class ConversationFragment : BaseFragment(), IConversationView {
 
     override fun init() {
         super.init()
-        presenter.onLoadConversationsData()
 
         swipeRefreshLayout.apply {
             isRefreshing=true

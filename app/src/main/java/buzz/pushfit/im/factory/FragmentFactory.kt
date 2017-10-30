@@ -10,7 +10,7 @@ import buzz.pushfit.im.mvp.view.fragment.SpaceFragment
  * Created by yuequan on 2017/10/27.
  */
 class FragmentFactory private constructor(){
-    val message by lazy {
+    val conversation by lazy {
         ConversationFragment()
     }
 
@@ -28,7 +28,7 @@ class FragmentFactory private constructor(){
     fun getFragment(tabId:Int):Fragment?{
 
         when(tabId){
-            R.id.navigation_message ->return message
+            R.id.navigation_message ->return conversation
             R.id.navigation_friends ->return friends
             R.id.navigation_space ->return space
         }

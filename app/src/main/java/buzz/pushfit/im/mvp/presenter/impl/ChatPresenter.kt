@@ -20,8 +20,8 @@ class ChatPresenter(val view: IChatView) : IChatPresenter {
         doAsync {
 
             val conversation = EMClient.getInstance().chatManager().getConversation(username)
+            conversation.markAllMessagesAsRead()//标记消息为已读
             messages.addAll(conversation.allMessages)
-
             uiThread {
                 view.onMessageLoad()
             }
@@ -62,7 +62,6 @@ class ChatPresenter(val view: IChatView) : IChatPresenter {
             val conversation = EMClient.getInstance().chatManager().getConversation(username)
             val msgId = messages[0].msgId
             val loadMoreMsgFromDB = conversation.loadMoreMsgFromDB(msgId, PAGE_SIZE)
-            conversation.markAllMessagesAsRead()//标记消息为已读
             messages.addAll(0,loadMoreMsgFromDB)
             uiThread {view.onMoreMessageLoaded(loadMoreMsgFromDB.size)  }
         }
