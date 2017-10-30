@@ -1,8 +1,8 @@
 package buzz.pushfit.im.mvp.presenter.impl
 
 import buzz.pushfit.im.adapter.MyEMCallBackAdapter
-import buzz.pushfit.im.mvp.presenter.IChatPresenter
-import buzz.pushfit.im.mvp.view.IChatView
+import buzz.pushfit.im.mvp.presenter.interfacces.IChatPresenter
+import buzz.pushfit.im.mvp.view.interfaces.IChatView
 import com.hyphenate.chat.EMClient
 import com.hyphenate.chat.EMMessage
 import org.jetbrains.anko.doAsync
@@ -62,6 +62,7 @@ class ChatPresenter(val view: IChatView) : IChatPresenter {
             val conversation = EMClient.getInstance().chatManager().getConversation(username)
             val msgId = messages[0].msgId
             val loadMoreMsgFromDB = conversation.loadMoreMsgFromDB(msgId, PAGE_SIZE)
+            conversation.markAllMessagesAsRead()//标记消息为已读
             messages.addAll(0,loadMoreMsgFromDB)
             uiThread {view.onMoreMessageLoaded(loadMoreMsgFromDB.size)  }
         }

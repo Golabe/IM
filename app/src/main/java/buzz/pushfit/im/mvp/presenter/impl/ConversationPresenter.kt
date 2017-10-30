@@ -1,7 +1,7 @@
 package buzz.pushfit.im.mvp.presenter.impl
 
-import buzz.pushfit.im.mvp.presenter.IConversationPresenter
-import buzz.pushfit.im.mvp.view.IConversationView
+import buzz.pushfit.im.mvp.presenter.interfacces.IConversationPresenter
+import buzz.pushfit.im.mvp.view.interfaces.IConversationView
 import com.hyphenate.chat.EMClient
 import com.hyphenate.chat.EMConversation
 import com.hyphenate.exceptions.HyphenateException

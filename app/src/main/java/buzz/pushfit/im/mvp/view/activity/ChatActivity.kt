@@ -10,7 +10,7 @@ import buzz.pushfit.im.adapter.TextWatcherAdapter
 import buzz.pushfit.im.base.BaseActivity
 import buzz.pushfit.im.adapter.MessageListAdapter
 import buzz.pushfit.im.mvp.presenter.impl.ChatPresenter
-import buzz.pushfit.im.mvp.view.IChatView
+import buzz.pushfit.im.mvp.view.interfaces.IChatView
 import com.hyphenate.EMMessageListener
 import com.hyphenate.chat.EMClient
 import com.hyphenate.chat.EMMessage

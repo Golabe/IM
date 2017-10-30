@@ -1,4 +1,4 @@
-package buzz.pushfit.im.mvp.view
+package buzz.pushfit.im.mvp.view.interfaces
 
 import buzz.pushfit.im.base.IBaseView
 

@@ -4,8 +4,10 @@ import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
+import buzz.pushfit.im.mvp.view.activity.ChatActivity
 import buzz.pushfit.im.widget.ConversationListItemView
 import com.hyphenate.chat.EMConversation
+import org.jetbrains.anko.startActivity
 
 /**
  * Created by yuequan on 2017/10/30.
@@ -17,6 +19,9 @@ class ConversationListAdapter(val context: Context, private val conversations: M
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
         val conversationListItemView = holder?.itemView as ConversationListItemView
         conversationListItemView.bindView(conversations[position])
+        conversationListItemView.setOnClickListener {
+            context.startActivity<ChatActivity>("username" to  conversations[position].conversationId())
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {

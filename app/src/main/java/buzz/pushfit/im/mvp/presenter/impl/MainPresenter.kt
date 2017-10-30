@@ -1,14 +1,14 @@
 package buzz.pushfit.im.mvp.presenter.impl
 
 import buzz.pushfit.im.adapter.MyEMCallBackAdapter
-import buzz.pushfit.im.mvp.presenter.IMainPresenter
-import buzz.pushfit.im.mvp.view.IMainView
+import buzz.pushfit.im.mvp.presenter.interfacces.IMainPresenter
+import buzz.pushfit.im.mvp.view.interfaces.IMainView
 import com.hyphenate.chat.EMClient
 
 /**
  * Created by yuequan on 2017/10/29.
  */
-class MainPresenter(val view:IMainView):IMainPresenter {
+class MainPresenter(val view: IMainView): IMainPresenter {
     override fun onLogout() {
         EMClient.getInstance().logout(true, object : MyEMCallBackAdapter() {
             override fun onSuccess() = uiThread { view.onLogoutSuccess() }

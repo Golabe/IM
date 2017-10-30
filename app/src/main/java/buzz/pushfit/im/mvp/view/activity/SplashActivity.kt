@@ -4,7 +4,7 @@ import android.os.Handler
 import buzz.pushfit.im.R
 import buzz.pushfit.im.base.BaseActivity
 import buzz.pushfit.im.mvp.presenter.impl.SplashPresenter
-import buzz.pushfit.im.mvp.view.ISplashView
+import buzz.pushfit.im.mvp.view.interfaces.ISplashView
 import org.jetbrains.anko.startActivity
 
 /**

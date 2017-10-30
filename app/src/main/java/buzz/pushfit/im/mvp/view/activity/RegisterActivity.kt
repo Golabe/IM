@@ -1,11 +1,9 @@
 package buzz.pushfit.im.mvp.view.activity
 
-import android.view.KeyEvent
-import android.widget.TextView
 import buzz.pushfit.im.R
 import buzz.pushfit.im.base.BaseActivity
 import buzz.pushfit.im.mvp.presenter.impl.RegisterPresenter
-import buzz.pushfit.im.mvp.view.IRegisterView
+import buzz.pushfit.im.mvp.view.interfaces.IRegisterView
 import kotlinx.android.synthetic.main.abc_activity_register.*
 import org.jetbrains.anko.toast
 

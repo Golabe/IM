@@ -7,7 +7,7 @@ import android.support.v4.app.ActivityCompat
 import buzz.pushfit.im.R
 import buzz.pushfit.im.base.BaseActivity
 import buzz.pushfit.im.mvp.presenter.impl.LoginPresenter
-import buzz.pushfit.im.mvp.view.ILoginView
+import buzz.pushfit.im.mvp.view.interfaces.ILoginView
 import kotlinx.android.synthetic.main.abc_activity_login.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast

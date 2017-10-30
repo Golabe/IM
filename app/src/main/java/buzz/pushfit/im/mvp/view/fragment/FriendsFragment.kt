@@ -9,7 +9,7 @@ import buzz.pushfit.im.adapter.EMContactListenerAdapter
 import buzz.pushfit.im.adapter.FriendsListAdapter
 import buzz.pushfit.im.base.BaseFragment
 import buzz.pushfit.im.mvp.presenter.impl.FriendsPresenter
-import buzz.pushfit.im.mvp.view.IFriendsView
+import buzz.pushfit.im.mvp.view.interfaces.IFriendsView
 import buzz.pushfit.im.widget.SlideBar
 import com.hyphenate.chat.EMClient
 import kotlinx.android.synthetic.main.abd_fragment_friends.*

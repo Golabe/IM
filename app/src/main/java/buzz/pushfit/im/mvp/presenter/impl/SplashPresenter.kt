@@ -1,7 +1,7 @@
 package buzz.pushfit.im.mvp.presenter.impl
 
-import buzz.pushfit.im.mvp.presenter.ISplashPresenter
-import buzz.pushfit.im.mvp.view.ISplashView
+import buzz.pushfit.im.mvp.presenter.interfacces.ISplashPresenter
+import buzz.pushfit.im.mvp.view.interfaces.ISplashView
 import com.hyphenate.chat.EMClient
 
 /**

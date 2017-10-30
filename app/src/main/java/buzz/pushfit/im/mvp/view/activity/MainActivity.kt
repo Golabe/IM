@@ -15,7 +15,7 @@ import buzz.pushfit.im.R
 import buzz.pushfit.im.base.BaseActivity
 import buzz.pushfit.im.factory.FragmentFactory
 import buzz.pushfit.im.mvp.presenter.impl.MainPresenter
-import buzz.pushfit.im.mvp.view.IMainView
+import buzz.pushfit.im.mvp.view.interfaces.IMainView
 import kotlinx.android.synthetic.main.abc_activity_main.*
 import kotlinx.android.synthetic.main.layout_content_main.*
 import kotlinx.android.synthetic.main.layout_drawer_bottom.*

@@ -2,8 +2,8 @@ package buzz.pushfit.im.mvp.presenter.impl
 
 import buzz.pushfit.im.mvp.data.AddFriendItem
 import buzz.pushfit.im.mvp.data.db.IMDataBase
-import buzz.pushfit.im.mvp.presenter.IAddFriendPresenter
-import buzz.pushfit.im.mvp.view.IAddFriendView
+import buzz.pushfit.im.mvp.presenter.interfacces.IAddFriendPresenter
+import buzz.pushfit.im.mvp.view.interfaces.IAddFriendView
 
 import cn.bmob.v3.exception.BmobException
 import cn.bmob.v3.BmobUser

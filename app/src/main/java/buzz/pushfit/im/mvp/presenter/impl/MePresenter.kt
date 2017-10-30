@@ -1,8 +1,8 @@
 package buzz.pushfit.im.mvp.presenter.impl
 
 import buzz.pushfit.im.adapter.MyEMCallBackAdapter
-import buzz.pushfit.im.mvp.presenter.IMePresenter
-import buzz.pushfit.im.mvp.view.IMeView
+import buzz.pushfit.im.mvp.presenter.interfacces.IMePresenter
+import buzz.pushfit.im.mvp.view.interfaces.IMeView
 import com.hyphenate.chat.EMClient
 
 /**

@@ -3,8 +3,8 @@ package buzz.pushfit.im.mvp.presenter.impl
 import buzz.pushfit.im.mvp.data.FriendsListItem
 import buzz.pushfit.im.mvp.data.db.Contact
 import buzz.pushfit.im.mvp.data.db.IMDataBase
-import buzz.pushfit.im.mvp.presenter.IFriendsPresenter
-import buzz.pushfit.im.mvp.view.IFriendsView
+import buzz.pushfit.im.mvp.presenter.interfacces.IFriendsPresenter
+import buzz.pushfit.im.mvp.view.interfaces.IFriendsView
 import com.hyphenate.chat.EMClient
 import com.hyphenate.exceptions.HyphenateException
 import org.jetbrains.anko.doAsync

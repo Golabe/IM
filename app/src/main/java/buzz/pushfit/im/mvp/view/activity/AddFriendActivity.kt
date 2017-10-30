@@ -8,7 +8,7 @@ import buzz.pushfit.im.R
 import buzz.pushfit.im.adapter.AddFriendAdapter
 import buzz.pushfit.im.base.BaseActivity
 import buzz.pushfit.im.mvp.presenter.impl.AddFriendPresenter
-import buzz.pushfit.im.mvp.view.IAddFriendView
+import buzz.pushfit.im.mvp.view.interfaces.IAddFriendView
 import kotlinx.android.synthetic.main.abc_activity_add_friend.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
 import org.jetbrains.anko.toast

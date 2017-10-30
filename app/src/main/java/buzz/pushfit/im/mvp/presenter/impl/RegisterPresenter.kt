@@ -1,10 +1,9 @@
 package buzz.pushfit.im.mvp.presenter.impl
 
-import android.util.Log
 import buzz.pushfit.im.extention.isValidPassword
 import buzz.pushfit.im.extention.isValidUserName
-import buzz.pushfit.im.mvp.presenter.IRegisterPresenter
-import buzz.pushfit.im.mvp.view.IRegisterView
+import buzz.pushfit.im.mvp.presenter.interfacces.IRegisterPresenter
+import buzz.pushfit.im.mvp.view.interfaces.IRegisterView
 import cn.bmob.v3.exception.BmobException
 import cn.bmob.v3.listener.SaveListener
 import cn.bmob.v3.BmobUser

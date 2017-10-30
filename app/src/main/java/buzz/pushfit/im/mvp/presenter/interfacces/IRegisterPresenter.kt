@@ -1,4 +1,4 @@
-package buzz.pushfit.im.mvp.presenter
+package buzz.pushfit.im.mvp.presenter.interfacces
 
 import buzz.pushfit.im.base.BasePresenter
 

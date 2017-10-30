@@ -1,10 +1,9 @@
 package buzz.pushfit.im.mvp.presenter.impl
 
-import android.util.Log
 import buzz.pushfit.im.extention.isValidPassword
 import buzz.pushfit.im.extention.isValidUserName
-import buzz.pushfit.im.mvp.presenter.ILoginPresenter
-import buzz.pushfit.im.mvp.view.ILoginView
+import buzz.pushfit.im.mvp.presenter.interfacces.ILoginPresenter
+import buzz.pushfit.im.mvp.view.interfaces.ILoginView
 import com.hyphenate.EMCallBack
 import com.hyphenate.chat.EMClient
 
