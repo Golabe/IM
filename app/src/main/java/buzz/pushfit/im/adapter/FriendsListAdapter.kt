@@ -49,6 +49,8 @@ class FriendsListAdapter(val context: Context, private val friendItemList: Mutab
     }
 
     private fun deleteFriend(username: String) {
+        //删除和某个user会话，如果需要保留聊天记录，传false
+        EMClient.getInstance().chatManager().deleteConversation(username, false)
 
                 EMClient.getInstance().contactManager().aysncDeleteContact(username,object : MyEMCallBackAdapter() {
                     override fun onSuccess() {

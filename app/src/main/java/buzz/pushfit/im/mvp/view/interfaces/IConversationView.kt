@@ -9,4 +9,5 @@ interface IConversationView :IBaseView {
 
     fun onLoadConversationsSuccess()
     fun onLoadConversationsFailed()
+
 }

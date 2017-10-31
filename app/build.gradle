@@ -54,5 +54,5 @@ dependencies {
     compile "com.android.support:recyclerview-v7:$support_version"
 
     compile 'cn.bmob.android:bmob-sdk:3.5.0'
-
+    compile 'com.roughike:bottom-bar:2.3.1'
 }

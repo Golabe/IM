@@ -4,7 +4,6 @@ package buzz.pushfit.im.mvp.view.activity
 import android.annotation.SuppressLint
 import android.os.Build
 import android.support.annotation.RequiresApi
-import android.support.design.widget.BottomNavigationView
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
@@ -12,6 +11,7 @@ import android.support.v7.app.AlertDialog
 import android.view.MenuItem
 import android.view.View
 import buzz.pushfit.im.R
+import buzz.pushfit.im.adapter.EMMessageListenerAdapter
 import buzz.pushfit.im.base.BaseActivity
 import buzz.pushfit.im.factory.FragmentFactory
 import buzz.pushfit.im.mvp.presenter.impl.MainPresenter
@@ -19,6 +19,8 @@ import buzz.pushfit.im.mvp.view.interfaces.IMainView
 import com.hyphenate.EMConnectionListener
 import com.hyphenate.EMError
 import com.hyphenate.chat.EMClient
+import com.hyphenate.chat.EMMessage
+import com.roughike.bottombar.OnTabSelectListener
 import kotlinx.android.synthetic.main.abc_activity_main.*
 import kotlinx.android.synthetic.main.layout_content_main.*
 import kotlinx.android.synthetic.main.layout_drawer_bottom.*
@@ -31,12 +33,12 @@ class MainActivity : BaseActivity(), IMainView, NavigationView.OnNavigationItemS
     @SuppressLint("StringFormatInvalid")
     private val titles = arrayOf("消息", "联系人", "动态")
 
-    //底部导航栏点击事件监听
-    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+
+    private val mOnTabSelectListener= OnTabSelectListener { itemId->
         val beginTransaction = supportFragmentManager.beginTransaction()
-        beginTransaction.replace(R.id.fragment, FragmentFactory.instance.getFragment(item.itemId))
+        beginTransaction.replace(R.id.fragment, FragmentFactory.instance.getFragment(itemId))
         beginTransaction.commit()
-        when (item.itemId) {
+        when (itemId) {
             R.id.navigation_message -> {
                 between.text = titles[0]
                 right.visibility = View.GONE
@@ -52,7 +54,24 @@ class MainActivity : BaseActivity(), IMainView, NavigationView.OnNavigationItemS
                 right.visibility = View.GONE
             }
         }
-        true
+    }
+    private val mEmConnectionListener =object :EMConnectionListener{
+        override fun onConnected() {
+        }
+        override fun onDisconnected(p0: Int) {
+            if (p0==EMError.USER_LOGIN_ANOTHER_DEVICE){
+                //发送多设备登录 跳转到登录界面
+                startActivity<LoginActivity>()
+                finish()
+            }
+        }
+    }
+    private val mMessageListener =object : EMMessageListenerAdapter() {
+        override fun onMessageDelivered(message: List<EMMessage>) {
+            runOnUiThread {
+                updateBottomBarUnReadMsgCount()
+            }
+        }
     }
 
     override fun getLayoutResId(): Int = R.layout.abc_activity_main
@@ -62,27 +81,14 @@ class MainActivity : BaseActivity(), IMainView, NavigationView.OnNavigationItemS
         super.init()
         between.text = getString(R.string.title_message)
         initDrawer()
-        navigation.itemIconTintList = resources.getColorStateList(R.drawable.nav_menu_text_color, null)
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)//底部导航栏点击事件监听
+        navigation.setOnTabSelectListener(mOnTabSelectListener)
         left.setOnClickListener { drawerLayout.openDrawer(GravityCompat.START) }//打开侧滑菜单
         logout.setOnClickListener { logout() }//退出登录
 
-        EMClient.getInstance().addConnectionListener(object :EMConnectionListener{
-            override fun onConnected() {
+        EMClient.getInstance().addConnectionListener(mEmConnectionListener)
 
-            }
-
-            override fun onDisconnected(p0: Int) {
-                if (p0==EMError.USER_LOGIN_ANOTHER_DEVICE){
-                    //发送多设备登录 跳转到登录界面
-                    startActivity<LoginActivity>()
-                    finish()
-                }
-            }
-        })
-
+        EMClient.getInstance().chatManager().addMessageListener(mMessageListener)
     }
-
     private fun logout() {
         AlertDialog.Builder(this)
                 .setTitle(getString(R.string.hint))
@@ -131,7 +137,6 @@ class MainActivity : BaseActivity(), IMainView, NavigationView.OnNavigationItemS
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
-
     override fun onLogoutSuccess() {
         toast(getString(R.string.logout_success))
         startActivity<LoginActivity>()
@@ -141,12 +146,17 @@ class MainActivity : BaseActivity(), IMainView, NavigationView.OnNavigationItemS
     override fun onLogoutError() = toast(getString(R.string.logout_error))
 
     override fun onResume() {
+        updateBottomBarUnReadMsgCount()
         super.onResume()
+    }
 
-
+    private fun updateBottomBarUnReadMsgCount() {
+        val tabWithId = navigation.getTabWithId(R.id.navigation_message)
+        tabWithId.setBadgeCount(EMClient.getInstance().chatManager().unreadMessageCount)
     }
 
     override fun onDestroy() {
         super.onDestroy()
+        EMClient.getInstance().chatManager().removeMessageListener(mMessageListener)
     }
 }

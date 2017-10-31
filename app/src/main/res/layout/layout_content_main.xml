@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-   >
+    android:orientation="vertical">
     <!--Toolbar-->
     <include
         android:id="@+id/main_toolbar"
@@ -19,17 +18,12 @@
 
     </FrameLayout>
 
-
-
-
-
-    <!--底部导航栏-->
-    <android.support.design.widget.BottomNavigationView
+    <com.roughike.bottombar.BottomBar
         android:id="@+id/navigation"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/bottom_bar_height"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
         android:background="?android:attr/windowBackground"
-        app:menu="@menu/navigation" />
-
+        app:bb_tabXmlResource="@xml/bottombar_tabs" />
 
 </LinearLayout>

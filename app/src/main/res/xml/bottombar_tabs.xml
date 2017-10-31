@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        icon="@mipmap/ic_message_24"
+        id="@+id/navigation_message"
+        title="@string/title_message" />
+
+    <tab
+        icon="@mipmap/ic_friends_24"
+        id="@+id/navigation_friends"
+        title="@string/title_friends" />
+
+    <tab
+        icon="@mipmap/ic_space_24"
+        id="@+id/navigation_space"
+        title="@string/title_space" />
+</tabs>

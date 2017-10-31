@@ -30,6 +30,8 @@ class FriendsFragment : BaseFragment(), IFriendsView {
             super.onContactAdded(p0)
             presenter.onLoadFriendsData() //重新获取联系人列表
         }
+
+
     }
     private val slideBarListener = object : SlideBar.OnSectionChangeListener {
         override fun onSectionChange(firstLatter: String) {
@@ -70,6 +72,7 @@ class FriendsFragment : BaseFragment(), IFriendsView {
     }
     private fun initSwipeRefreshLayout() {
         mRefreshLayout.apply {
+
             setColorSchemeResources(R.color.colorPrimary)
             isRefreshing = true
             //下拉加载好友列表

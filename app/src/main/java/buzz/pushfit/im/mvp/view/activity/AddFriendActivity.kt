@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.layout_toolbar.*
 import org.jetbrains.anko.toast
 
 class AddFriendActivity : BaseActivity(), IAddFriendView {
-    val preseneter = AddFriendPresenter(this)
+    private val preseneter = AddFriendPresenter(this)
 
     lateinit var mRecyclerView: RecyclerView
     lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
@@ -25,13 +25,8 @@ class AddFriendActivity : BaseActivity(), IAddFriendView {
         super.init()
         between.text = getString(R.string.add_friends)
 
-        mSwipeRefreshLayout = findViewById(R.id.swipeRefreshLayout)
         mRecyclerView = findViewById(R.id.recyclerView)
 
-        mSwipeRefreshLayout.apply {
-
-            isRefreshing = false
-        }
 
         mRecyclerView.apply {
             setHasFixedSize(true)
